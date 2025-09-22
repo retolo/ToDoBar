@@ -1,0 +1,18 @@
+.blockTasks{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 650px;
+    height: 400px;
+
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 14px;
+    
+}
+
+.header{
+    text-align: center;
+}

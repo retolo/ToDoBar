@@ -1,0 +1,41 @@
+.listDays{
+    margin-top: 100px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.buttonDays{
+    border: 1px solid lightgray;
+    background-color: white;
+    color: black;
+    border-radius: 30px;
+    padding: 20px;
+    cursor: pointer;
+    transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+
+}
+
+li:last-child .buttonDays{
+    background-color: #218FD1;
+    color: white;
+    border: none;
+}
+
+
+.buttonDays:hover{
+    scale: 1.1;
+}
+.buttonDays:active{
+    scale: 0.95;
+}
+
+.buttonDays:focus{
+    border-color: lightgreen;
+}
+
+
+
