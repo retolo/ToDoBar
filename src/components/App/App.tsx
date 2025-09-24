@@ -1,12 +1,11 @@
 import Week from "../Week/Week";
 import CreateCard from "../CreateCard/CreateCard";
-import React, { useState } from "react";
+import  { useState } from "react";
 import DayTasks from "../Daytasks/DayTasks";
 import { type Tasks } from "../Daytasks/DayTasks";
 function App(){
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const [isClose, setIsClose] = useState<boolean>(false);
   const [isOpenTaskBar, setIsOpenTaskBar] = useState<boolean>(false);
   
   const [day, setDay] = useState<string>('');
