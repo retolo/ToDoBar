@@ -27,7 +27,7 @@ function DayTasks({data, day, onClose}: DayTasksProps){
             <div>
                 <ul className={css.list}>
                 {data !== undefined && !data.some((dayTask) => dayTask.day === day) ? (
-                    <li><p>No task for these day</p></li>
+                    <li className={css.noTasks}><p>No task for these day....</p></li>
                 ): (
                     data !== undefined && data
                         ?.filter((task) => task.day === day)

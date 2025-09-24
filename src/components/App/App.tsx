@@ -6,6 +6,7 @@ import { type Tasks } from "../Daytasks/DayTasks";
 function App(){
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [isClose, setIsClose] = useState<boolean>(false);
   const [isOpenTaskBar, setIsOpenTaskBar] = useState<boolean>(false);
   
   const [day, setDay] = useState<string>('');
@@ -29,29 +30,45 @@ function App(){
   }
 
   const handelOpenTaskbar = () =>{
+    setIsOpenTaskBar(true);
+    setIsOpen(false)
+
+  }
+
+  const handelCloseTaskbar = () =>{
     if(isOpenTaskBar === true){
       setIsOpenTaskBar(false)
-    }else{
-      setIsOpenTaskBar(true)
-      setIsOpen(false)
     }
+
   }
+
+
   const storageKey: string = 'UserTasks'
   const data = localStorage.getItem(storageKey);
-
+console.log(data);
   const handelData = (formData:FormData) =>{
     const values = Object.fromEntries(formData) as unknown as Tasks;
-    
-    
-    
-    
-    if(tasks === undefined){
-      setTasks([{task: values.task, day: values.day, time: values.time, tag: values.tag}]);
+    console.log(values);
+    if (!tasks || tasks.length === 0) {
+      
+      const userData = localStorage.getItem(storageKey);
+      if(userData !== null){
+        const newData = [...JSON.parse(userData), values];
+        setTasks(newData)
+        localStorage.setItem( storageKey,JSON.stringify(newData))
+      }else{
+        const newTasks = [values];
+        setTasks(newTasks);
+        localStorage.setItem(storageKey, JSON.stringify(newTasks));
+      }
+      
     }else{
-      const newObj = [...tasks, {task: values.task, day: values.day, time: values.time, tag: values.tag}];
-      setTasks(newObj);
-      localStorage.setItem(storageKey, JSON.stringify([...tasks, values]));
-    
+      const userData = localStorage.getItem(storageKey);
+      if(userData !== null){
+        const newData = [...JSON.parse(userData), values];
+        setTasks(newData)
+        localStorage.setItem( storageKey,JSON.stringify(newData));
+      }
     }
   }
   
@@ -70,7 +87,7 @@ function App(){
       <CreateCard  onClose={handleOpenClose} handelData={handelData}/>
     }
     {isOpenTaskBar === true  &&
-      <DayTasks  onClose={handelOpenTaskbar} day={day} data={data !== null ? JSON.parse(data) : undefined}/>
+      <DayTasks  onClose={handelCloseTaskbar} day={day} data={data !== null ? JSON.parse(data) : undefined}/>
     }
     
     </>

@@ -85,3 +85,15 @@
 .checkButton:hover{
     opacity: 0.7;
 }
+
+.noTasks{  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.noTasks > p{
+    font-size: 20pt;
+    font-weight: 600;
+}
