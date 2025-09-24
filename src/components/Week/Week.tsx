@@ -5,7 +5,7 @@ import css from './Week.module.css'
 
 interface WeekProps{
     onClick: () => void;
-    setDay: (day: string | null) => void;
+    setDay: (day: string) => void;
     onClose: () => void;
 }
 function Week({onClick, setDay, onClose}: WeekProps){
@@ -13,7 +13,8 @@ function Week({onClick, setDay, onClose}: WeekProps){
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday', 'Saturday'];
 
     const handelDay = (event: React.MouseEvent<HTMLButtonElement>) =>{
-        setDay(event.currentTarget.textContent);
+        const day = event.currentTarget.textContent
+        setDay(day);
     }
     return(
         <div>
