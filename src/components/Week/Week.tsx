@@ -5,7 +5,7 @@ import css from './Week.module.css'
 
 interface WeekProps{
     onClick: () => void;
-    setDay: (day: string) => void;
+    setDay: (day: string | null) => void;
     onClose: () => void;
 }
 function Week({onClick, setDay, onClose}: WeekProps){
