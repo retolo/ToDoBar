@@ -13,8 +13,11 @@ function Week({onClick, setDay, onClose}: WeekProps){
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday', 'Saturday'];
 
     const handelDay = (event: React.MouseEvent<HTMLButtonElement>) =>{
-        const day = event.currentTarget.textContent
-        setDay(day);
+        const day = event.currentTarget.textContent;
+        if(day !== null){
+            setDay(day);
+        }
+        
     }
     return(
         <div>
