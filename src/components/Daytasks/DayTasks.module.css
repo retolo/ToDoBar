@@ -27,7 +27,7 @@
 .liTasks{
     display: flex;
     align-items: center;
-    gap: 15px
+    gap: 4px
 }
 
 .list{
@@ -97,3 +97,19 @@
     font-size: 20pt;
     font-weight: 600;
 }
+
+.inputsData{
+    background-color: white;
+    /* border: none; */
+    width: 150px;
+    color: black;
+    font-size: 14pt;
+    margin-right: 10px;
+    padding-left: 14px;
+}
+
+
+.inputsData:focus{
+    width: auto;
+}
+

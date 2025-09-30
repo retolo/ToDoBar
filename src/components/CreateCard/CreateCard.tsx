@@ -1,5 +1,4 @@
 import css from './CreateCard.module.css'
-
 interface CreateCardProps{
     onClose: () => void;
     handelData: (formData:FormData) => void
@@ -7,6 +6,7 @@ interface CreateCardProps{
 
 function CreateCard({onClose, handelData}: CreateCardProps){
 
+    const id = crypto.randomUUID();
     
     return(
         <div className={css.formWrapper}>
@@ -33,7 +33,7 @@ function CreateCard({onClose, handelData}: CreateCardProps){
                 </label>
 
                 <label >
-                    <input name='tag' required className={css.input} placeholder="Enter tag name" type="text"/>
+                    <input name='id' defaultValue={id + 1}  required className={css.inputLast} type="text"/>
                     
                 </label>
 

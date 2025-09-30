@@ -40,6 +40,10 @@
     color: black;
 }
 
+.inputLast{
+    display: none;
+}
+
 .input:focus{
     border-color: #218FD1;
     outline: none;
