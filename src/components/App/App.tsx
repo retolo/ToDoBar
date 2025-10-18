@@ -2,18 +2,17 @@ import Week from "../Week/Week";
 import CreateCard from "../CreateCard/CreateCard";
 import  { useEffect, useState } from "react";
 import DayTasks from "../Daytasks/DayTasks";
+import Modal from "../Modal/Modal";
 import { type Tasks } from "../Daytasks/DayTasks";
 function App(){
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenTaskBar, setIsOpenTaskBar] = useState<boolean>(false);
   const [deleteItem, setDeleteItem] = useState<Tasks>();
-  const [id, setId] = useState<string>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [toggle, setToggle] = useState(false);
-  
   const [day, setDay] = useState<string>('');
   const [tasks, setTasks] = useState<Tasks[]>();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [filterItem, setFilterItem] = useState<Tasks | undefined>(undefined)
 
   const handleOpenClose = () =>{
     if(isOpen === true){
@@ -90,46 +89,44 @@ function App(){
     }, [deleteItem])
     
     
-    useEffect(() =>{
-      const dataNew = localStorage.getItem(storageKey);
-      
-      if(dataNew !== null){
-        const newData = [...JSON.parse(dataNew)];
-        const found = newData.find((obj) => obj.id === id);
-        
-        if(found !== undefined){
-          
-            const inputs = document.querySelectorAll(`[data-type="${found.id}"]`);
-            inputs.forEach((input) =>{
-              if(toggle){
-                input.setAttribute('disabled', '')
-                input.setAttribute('value', input.value);
-                
-                console.log(input);
-                
-              }else{
-                input.removeAttribute('disabled');
-                console.log(input);
-              }
-            });      
-        }
-
-      }
-    }, [id, toggle]);
+    
       
     
 
 
-  const handelId = (id: string) =>{
-    setId(id)
+  const handelEditButton = (id: string) =>{
+    setIsOpenModal(true);
+    const getItem = localStorage.getItem(storageKey);
 
-    if(id !== undefined){
-      if(toggle === true){
-        setToggle(false)
-      }else{
-        setToggle(true)
-      }
+    if(getItem !== null){
+      const data = [...JSON.parse(getItem)];
+
+      const filterItem = data.find((item) => item.id === id);
+      // console.log(filterItem)
+      setFilterItem(filterItem)
     }
+    
+  }
+
+  const handelDataForm = (formData: FormData) =>{
+    const values = Object.fromEntries(formData) as unknown as Tasks;
+    const getItem = localStorage.getItem(storageKey);
+    
+    if(getItem !== null){
+      const data = [...JSON.parse(getItem)];
+
+      const filterItems = data.filter((item) => item.id !== filterItem?.id);
+      const editData = [...filterItems, {
+        task: values.task.length !== 0 ? values.task : filterItem?.task,
+        time: values.time.length !== 0 ? values.time : filterItem?.time,
+        day: values.day.length !== 0 ? values.day : filterItem?.day,
+        id: filterItem !== undefined ? filterItem.id : ''}]
+        
+      setTasks(editData)
+      localStorage.setItem(storageKey, JSON.stringify(editData))
+      console.log(filterItems);
+    }
+
     
   }
 
@@ -149,7 +146,11 @@ function App(){
       <CreateCard  onClose={handleOpenClose} handelData={handelData}/>
     }
     {isOpenTaskBar === true  &&
-      <DayTasks onEdit={handelId} onDelete={setDeleteItem}  onClose={handelCloseTaskbar} day={day} data={data !== null ? JSON.parse(data) : undefined}/>
+      <DayTasks onEdit={handelEditButton} onDelete={setDeleteItem}  onClose={handelCloseTaskbar} day={day} data={data !== null ? JSON.parse(data) : undefined}/>
+    }
+
+    {isOpenModal &&
+      <Modal onClose={() => setIsOpenModal(false)} handelData={handelDataForm}/>
     }
     
     </>

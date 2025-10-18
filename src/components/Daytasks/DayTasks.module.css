@@ -99,9 +99,6 @@
 }
 
 .inputsData{
-    background-color: white;
-    /* border: none; */
-    width: 150px;
     color: black;
     font-size: 14pt;
     margin-right: 10px;
@@ -113,3 +110,10 @@
     width: auto;
 }
 
+
+.done{
+    color: #45CC12;
+    margin-left: 30px;
+    font-size: 14pt;
+    font-weight: bold;
+}

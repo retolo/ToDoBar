@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import css from './DayTasks.module.css'
 
 export interface Tasks{
@@ -20,6 +21,16 @@ interface DayTasksProps{
 function DayTasks({data, day, onClose, onDelete, onEdit}: DayTasksProps){
 
 
+    const [done, setDone] = useState(false);
+
+
+    const handleCheck = () =>{
+        if(done){
+            setDone(false)
+        }else{
+            setDone(true)
+        }
+    }
     
     
     return(
@@ -39,8 +50,9 @@ function DayTasks({data, day, onClose, onDelete, onEdit}: DayTasksProps){
                         .map((task) =>
                     
                         <li className={css.liTasks} key={task.id}>
-                            <input data-type={task.id} className={css.inputsData} disabled  defaultValue={`Name: ${task.task}`}/>
-                            <input data-type={task.id} className={css.inputsData} disabled defaultValue={`Time: ${task.time}`}/>
+                            <p className={css.inputsData}>{`Name: ${task.task}` }</p>
+                            <p className={css.inputsData}>{`Time: ${task.time}` }</p>
+                            
                             
                             
                             <button onClick={() => onEdit(task.id)}  className={css.editButton} type='button'>
@@ -54,11 +66,15 @@ function DayTasks({data, day, onClose, onDelete, onEdit}: DayTasksProps){
                                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                                 </svg>
                             </button>
-                            <button className={css.checkButton}>
+                            <button onClick={handleCheck} className={css.checkButton}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"  viewBox="0 0 16 16">
                                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
                                 </svg>
                             </button>
+                            {done === true &&
+                                <p className={css.done}>Done!</p>
+                            }
+                            
                             
                         </li>
                     
