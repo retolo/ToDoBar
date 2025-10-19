@@ -4,7 +4,7 @@ interface CreateCardProps{
     handelData: (formData:FormData) => void
 }
 
-function CreateCard({onClose, handelData}: CreateCardProps){
+function CreateCard({ onClose, handelData}: CreateCardProps){
 
     const id = crypto.randomUUID();
     

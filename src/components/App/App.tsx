@@ -4,6 +4,7 @@ import  { useEffect, useState } from "react";
 import DayTasks from "../Daytasks/DayTasks";
 import Modal from "../Modal/Modal";
 import { type Tasks } from "../Daytasks/DayTasks";
+import JustDoIt from "../JustDoIt/JustDoIt";
 function App(){
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -14,20 +15,9 @@ function App(){
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [filterItem, setFilterItem] = useState<Tasks | undefined>(undefined)
 
-  const handleOpenClose = () =>{
-    if(isOpen === true){
-      setIsOpen(false)
-      
-      
-    }else{
-      setIsOpen(true)
-      setIsOpenTaskBar(false)
-    }
-  }
-
   const handelOpenTaskbar = () =>{
     setIsOpenTaskBar(true);
-    setIsOpen(false)
+
 
   }
 
@@ -67,13 +57,6 @@ function App(){
     }
   }
 
- 
-  
-  
-    
-   
-  
-
   
     useEffect(() =>{
       const dataNew = localStorage.getItem(storageKey);
@@ -88,11 +71,6 @@ function App(){
     }
     }, [deleteItem])
     
-    
-    
-      
-    
-
 
   const handelEditButton = (id: string) =>{
     setIsOpenModal(true);
@@ -130,20 +108,22 @@ function App(){
     
   }
 
-  
-  
-  
-  
-  
-  
   return(
     <>
-      <Week onClose={handelOpenTaskbar} onClick={handleOpenClose} setDay={setDay}/>
+      {data !== null  &&
+            <Week onClose={handelOpenTaskbar}  setDay={setDay}/>
+          }
+      {isOpenTaskBar === false &&
+        <JustDoIt onClick={() => setIsOpen(true)}/>
+      }
+      
+        
+
 
 
     {isOpen &&
 
-      <CreateCard  onClose={handleOpenClose} handelData={handelData}/>
+      <CreateCard  onClose={() => setIsOpen(false)} handelData={handelData}/>
     }
     {isOpenTaskBar === true  &&
       <DayTasks onEdit={handelEditButton} onDelete={setDeleteItem}  onClose={handelCloseTaskbar} day={day} data={data !== null ? JSON.parse(data) : undefined}/>

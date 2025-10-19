@@ -1,0 +1,45 @@
+
+
+
+.block{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+.header{
+    font-size: 50pt;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+.datatext{
+
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: gray;
+}
+
+
+.createButton{
+    background-color: transparent;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    font-size: 14pt;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 12px;
+    cursor: pointer;
+    transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.createButton:hover{
+    scale: 1.01;
+    box-shadow: none;
+    outline: none;
+}
