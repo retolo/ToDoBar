@@ -10,7 +10,7 @@ interface WeekProps{
 function Week({ setDay, onClose}: WeekProps){
 
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday', 'Saturday'];
-
+    // localStorage.clear()
     const handelDay = (event: React.MouseEvent<HTMLButtonElement>) =>{
         const day = event.currentTarget.textContent;
         if(day !== null){
@@ -26,9 +26,10 @@ function Week({ setDay, onClose}: WeekProps){
                         <button onClick={handelDay}   className={css.buttonDays} type="button">{day}</button>
                     </li>
                     
+                    
                 ))}
                 <li>
-                    
+                    <button type='button' onClick={() => localStorage.clear()}>Clear Task</button>
                 </li>
             </ul>
         </div>

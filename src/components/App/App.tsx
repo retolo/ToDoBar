@@ -31,6 +31,8 @@ function App(){
 
   const storageKey: string = 'UserTasks'
   const data = localStorage.getItem(storageKey);
+
+  
   const handelData = (formData:FormData) =>{
     const values = Object.fromEntries(formData) as unknown as Tasks;
     if (!tasks || tasks.length === 0) {

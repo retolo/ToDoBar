@@ -3,6 +3,7 @@ import css from './DayTasks.module.css'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
 import { CiEdit } from "react-icons/ci";
+
 export interface Tasks{
     task: string
     day: string
@@ -23,15 +24,16 @@ interface DayTasksProps{
 function DayTasks({data, day, onClose, onDelete, onEdit}: DayTasksProps){
 
 
-    const [done, setDone] = useState(false);
+    
+    const [id, setId] = useState<string[]>([]);
 
-
-    const handleCheck = () =>{
-        if(done){
-            setDone(false)
-        }else{
-            setDone(true)
+    const handleCheck = (item: Tasks) =>{
+        if(data !== undefined){
+            
+            setId([...id, item.id]);
+            
         }
+       
     }
     
     
@@ -63,10 +65,10 @@ function DayTasks({data, day, onClose, onDelete, onEdit}: DayTasksProps){
                             <button onClick={() => onDelete(task)}  className={css.markButton} type='button'>
                                 <RiDeleteBin6Line size={25} className={css.iconDelete}/>
                             </button>
-                            <button onClick={handleCheck} className={css.markButton}>
+                            <button onClick={() => handleCheck(task)} className={css.markButton}>
                                 <FaCheck size={25} className={css.iconCheck}/>
                             </button>
-                            {done === true &&
+                            {id.includes(task.id)  &&
                                 <p className={css.done}>Done!</p>
                             }
                             
